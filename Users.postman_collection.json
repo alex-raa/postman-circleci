@@ -36,6 +36,42 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "/user/get",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Get all users was successful\", function () {",
+							"  pm.expect(pm.response.code).to.be.oneOf([200, 201, 202]);",
+							"});",
+							"",
+							"pm.test(\"Check user Stan with id = 1 exist\", () => {",
+							"    let client = pm.response.json().find(a => a.id == '1');",
+							"    pm.expect(client.username).to.equal(\"stan\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/user/get",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"user",
+						"get"
+					]
+				}
+			},
+			"response": []
 		}
 	]
 }
